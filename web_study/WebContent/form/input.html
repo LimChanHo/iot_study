@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script>
+function makeSureForm(){
+}
+
+function changeColor(){
+	var colorObj = document.getElementById("s_color");
+
+	var nameObj = document.getElementById("name");
+	var passObj = document.getElementById("pass");
+	var dateObj = document.getElementById("s_date");
+	nameObj.style="color:" + colorObj.value;
+	passObj.style="color:" + colorObj.value;
+	dateObj.style="color:" + colorObj.value;
+}
+
+function changeValue(obj){
+	if(obj.value.indexOf("@")!=-1){
+		var str = obj.value.substring(0, obj.value.indexOf("@"));
+		obj.value = str+"@";
+	}
+}
+</script>
+<body>
+<form id="test_form" method="get" action="/test.user">
+	이름 : <input type="text" id="name" name="name"/><br/>
+	비밀번호 : <input type="password" id="pass" name="pass"/><br/>
+	일자 : <input type="date" name="s_date" id="s_date"/><br/>
+	<input type="text" name="e_mail" id="e_mail" onkeyup="changeValue(this)"/>
+	색상 : <input type="color" id="s_color" onchange="changeColor()" name="s_color"/><br/>
+	<input type="button" value="확인" onclick="makeSureForm()"/>
+	<input type="submit" value="전송"/>
+</form>
+</body>
+</html>

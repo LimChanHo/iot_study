@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>타이틀</title>
+</head>
+<body id="bd1">
+<input type="button" value="생성!" onclick="fclick()"/>
+</body>
+<script>
+var bodyObj = document.getElementById("bd1");
+var initBodyStrs = new Array();
+var fclickCnt = 0;
+function fclick(){
+	var inputStr = "<input type='text' id='ip1' name='ip' onclick='initBody()'/>";
+	initBodyStrs[initBodyStrs.length] = bodyObj.innerHTML;
+	bodyObj.innerHTML += inputStr;
+	fclickCnt++;
+}
+
+function initBody(){
+	bodyObj.innerHTML = initBodyStrs[--fclickCnt];
+}
+</script>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form>
+<input type="text" id="t1"/>
+<input type="button" value="클릭" onclick="cl(this)"/>
+</form>
+<script>
+/*
+ * public class Exam {
+		public void printObj(Object obj){
+			System.out.println(obj);
+		}
+		public static void main(String[] args){
+			Exam e = new Exam();
+			e.printObj("new Element()");
+			e.printObj(new Element());
+		}
+	}
+ */
+var Exam = function(){
+	this.printObj = function(obj){
+		document.write(obj);
+	}
+}
+var e = new Exam();
+e.printObj("document.getElementById('t1')<br/>");
+e.printObj(document.getElementById('t1'));
+</script>
+</body>
+</html>

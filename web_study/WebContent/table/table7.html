@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+
+<script>
+function initBody(){
+	var txtObj = document.getElementById("txt");
+	alert(document.getElementById("txt").getAttribute("abc"));
+}
+</script>
+<body onload="initBody()">
+
+<input type="text" name="txt" id="txt"/>
+<input type="button" value="txt속성값 확인"  onclick="initBody()" abc="adf"/>
+</body>
+</html>

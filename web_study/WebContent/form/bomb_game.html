@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script>
+
+function generateBombGame(){
+	var num = Math.floor((Math.random() * 9) + 1);
+	var tableStr ="<table border='1'>";
+	var n = 1; 
+	for(var i=1;i<=3;i++){
+		tableStr+="<tr>";
+		for(var j=1;j<=3;j++){
+			tableStr += "<td><input type='button' value='" + (n) + "' onclick='checkBomb(this,"+ num+","+ n + ")'/></td>"
+			n++;
+		}			
+		tableStr+="</tr>";
+	}
+	tableStr+="</table>";
+	document.getElementById("result_div").innerHTML = tableStr;
+}
+function checkBomb(obj, num, n){
+	if(num==n){
+		alert("폭탄이 터졌다!! 게임이 끝났습니다.");
+		document.getElementById("result_div").innerHTML  = "";
+	}else{
+		obj.disabled=true;
+	}
+}
+</script>
+<body>
+<input type="button" value="게임 시작!!" onclick="generateBombGame()"/>
+<div id="result_div"></div>
+</body>
+</html>

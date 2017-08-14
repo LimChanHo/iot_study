@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script>
+	function makeInput() {
+		var mcObj = document.getElementById("makeCnt");
+		var gdObj = document.getElementById("gDiv");
+		var resultStr = "";
+		for (var i = 0; i < mcObj.value; i++) {
+			resultStr += "<input type='text' name='txt'>";
+		}
+		gdObj.innerHTML = resultStr;
+	}
+	function searchInput() {
+		var firstIdx;
+		var tCnt = 0;
+		var fCnt = 0;
+		var str = document.getElementById("searchValue").value;
+		var elObjs = document.getElementsByName("txt");
+		for (var i = 0; i < elObjs.length; i++) {
+			var targetValue = elObjs[i].value;
+			if (targetValue.indexOf(str) != -1) {
+				tCnt ++;
+				if(firstIdx==undefined){
+					firstIdx = i;
+				}
+				elObjs[i].value = "찾았다.";
+			}else{
+				elObjs[i].value = "못 찾았다.";
+				fCnt++;
+			}
+		}
+		if(firstIdx==undefined){
+			alert("아오 귀찮은 것들 못찾았다 이것들아!");
+		}else{
+			alert("찾은 갯수 = " + tCnt + ", 못찾은 갯수 = " + fCnt);
+			elObjs[firstIdx].focus();
+		}
+	}
+	function captureError(ex) {
+		alert(ex.stack);
+	}
+	function invoke(method, args) {
+		try {
+			return this[method].apply(this, args);
+		} catch (e) {
+			alert(e);
+			captureError(e); // report the error
+			throw e; // re-throw the error
+		}
+	}
+	
+</script>
+<body>
+    갱성 갯수 :
+	<input type="text" name="makeCnt" id="makeCnt" />
+	<input type="button" value="인풋박스생성" onclick="makeInput()" />
+	<div id="gDiv"></div>
+	검색값 : <input type="text" name="searchValue" id="searchValue"  value="searchValue" />
+	<input type="button" value="값을찾아라!" onclick="searchInput()">
+</body>
+</html>

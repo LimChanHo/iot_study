@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script>
+function searchFather(elementObj){
+	var fObj = elementObj.form;
+
+	var maxNum = fObj.elements.length;
+
+	for (var i = 0; i < maxNum; i++) {
+		var eObj = fObj.elements[i];
+		if(eObj.type=="button") continue;
+		if (i % 2 == 1) {
+			var checkNum = new Number(eObj.value);
+			try{
+				if (isNan(checkNum)) {
+					alert("숫자라고!!!!!!!!!");
+					eObj.value = "";
+					eObj.focus();
+					return false;
+				}
+			}catch(e){
+				alert(e);
+			}
+		}
+	}
+}
+</script>
+<body>
+<form onsubmit="checkForm(this)" action="test2.html" method="post">
+<input type="text"/><br/>
+<input type="text"/><br/>
+<input type="text"/><br/>
+<input type="button" value="전송" onclick="searchFather(this)"/><br/>
+<input type="text"/><br/>
+<input type="text"/><br/>
+<input type="text"/><br/>
+</form>
+</body>
+</html>

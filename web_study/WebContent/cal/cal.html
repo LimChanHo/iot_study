@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>계산기</title>
+</head>
+<script>
+function checkValue(){
+	var num1Obj = document.getElementById("num1");
+	var num1 = parseInt(num1Obj.value);
+	alert(num1);
+	var num2Obj = document.getElementById("num2");
+	var num2 = parseInt(num2Obj.value);
+
+	if(num1Obj.value.trim()=="" || isNaN(num1)){
+		alert("값 제대로 입력안할래!!?");
+		num1Obj.focus();
+		return false;
+	}
+	if(num2Obj.vaalue.trim()==""|| isNaN(num2)){
+		alert("값 제대로 입력안할래!!?");
+		num2Obj.focus();
+		return false;
+	}
+	var opObj = document.getElementById("op");
+	if(opObj.value.trim()==""){
+		alert("값 제대로 입력안할래!!?");
+		opObj.focus();
+		return false;
+	}
+	return true;
+}
+</script>
+<body>
+<form action="/asdf.cal" onsubmit="return checkValue()">
+<table border="1">
+<tr>
+<td>숫자1</td>
+<td>연산자1</td>
+<td>숫자2</td>
+<td>결과값</td>
+</tr>
+<tr>
+<td><input type="text" name="num1" id="num1"/></td>
+<td><select id="op" name="op">
+	<option value="">선택</option>
+	<option value="+">plus</option>
+	<option value="-">minus</option>
+	<option value="/">division</option>
+	<option value="*">multiple</option>
+</select></td>
+<td><input type="text" name="num2" id="num2"/></td>
+<td><div id="r_div"></div></td>
+</tr>
+<tr align="center">
+<td colspan="4"><input type="submit" value="계산해!!"/></td>
+</tr>
+</table>
+</form>
+</body>
+</html>

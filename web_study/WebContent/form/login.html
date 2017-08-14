@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script>
+function checkLogin(){
+	var idObj = document.getElementById("id").value;
+	var pwdObj = document.getElementById("pwd");
+
+	if(idObj.value==""){
+		alert("아이디 쓰라고!!");
+		idObj.focus();
+		return false;
+	}
+	if(pwdObj.value==""){
+		pwdObj.focus();
+		alert("비밀번호 쓰라고!!");
+		return false;
+	}
+	return true;
+}
+</script>
+<body>
+<form method="get" action="test.user" onsubmit="return checkLogin()">
+아이디 : <input type="text" name="id" id="id"/>
+비밀번호 : <input type="password" name="pwd" id="pwd"/>
+<input type="submit" value="로그인"/>
+</form>
+</body>
+</html>

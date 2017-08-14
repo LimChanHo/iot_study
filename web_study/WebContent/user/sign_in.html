@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script>
+
+function getHttpXmlObj(){
+	if(window.XMLHttpRequest){
+  		return new XMLHttpRequest();
+ 	}else if(window.ActiveXObject){
+  		return new ActiveXObject("Microsoft.XMLHTTP");
+ 	}
+	alert("해당 브라우져가  Ajax를 지원하지 않습니다.");
+}
+function doSignin(){
+	var idStr = "userid,userpwd,username,address,hp1,hp2,hp3,age,command";
+	var lengthStr = "30,100,100,200,4,4,4,3,100";
+	var typeStr = "s,s,s,s,n,n,n,n,s"
+	var params="?";
+	var ids = idStr.split(",");
+	var lengths = lengthStr.split(",");
+	var types = typeStr.split(",")
+	for(var i=0;i<ids.length;i++){
+		var maxLength = new Number(lengths[i]);
+		var typeVali = types[i];
+		var elObj =  document.getElementById(ids[i]);
+		if(!isNaN(maxLength)){
+			if(elObj.value.length>maxLength){
+				alert("제한길이를 넘었습니다. 확인해주세요");
+				elObj.value="";
+				elObj.focus();
+				return;
+			}
+		}
+		if(typeVali=="n"){
+			if(isNaN(new Number(elObj.value))){
+				alert("숫자만 입력해주세요.");
+				elObj.value="";
+				elObj.focus();
+				return;
+			}
+		}
+		params += ids[i]+"="+ elObj.value +"&";
+	}
+	var xhr = getHttpXmlObj();
+	var method = "get";
+	var url = "test.user";
+	var aSync = true;
+	xhr.onreadystatechange=function(){
+   		if (xhr.readyState==4){
+   			if(xhr.status==200){
+	   			var result = decodeURIComponent(xhr.responseText);
+	   			alert(result);
+   			}else{
+   				document.getElementById("bd_div").innerHTML += xhr.responseText;
+   			}
+        }
+    }
+	document.getElementById("bd_div").innerHTML = url+params;
+	return;
+   	xhr.open(method, url+params, aSync);
+   	if(method=="post"){
+   		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+   	}
+   	xhr.send();
+}
+</script>
+<body>
+<div width="100%" id="bd_div">
+<table border="1" cellspacing="0" cellpadding="0" width="400" align="center">
+<tr>
+	<td colspan="2"><p align="center"> = 회원 가입 = </p></td>
+</tr>
+<tr>
+	<td align="center">아이디</td>
+	<td><input type="text" name="userid" id="userid"  value="red"/></td>
+</tr>
+<tr>
+	<td align="center">비밀번호</td>
+	<td><input type="password" name="userpwd" id="userpwd" maxlength="100"value="red"/></td>
+</tr>
+<tr>
+	<td align="center">이름</td>
+	<td><input type="text" name="username" id="username" maxlength="100"value="홍길동"/></td>
+<tr>
+<tr>
+	<td align="center">주소</td>
+	<td><input type="text" name="address" id="address" size="35" value="서울강서구등촌1동"/></td>
+</tr>
+<tr>
+	<td align="center">휴대폰번호</td>
+	<td><input type="text" name="hp1" id="hp1" size="4" maxlength="4" value="010"/> 
+	- <input type="text" name="hp2" id="hp2"size="4" maxlength="4"value="6208"/>
+	 - <input type="text" name="hp3" id="hp3"size="4" maxlength="4"value="0000"/></td>
+</tr>
+<tr>
+	<td align="center">나이</td>
+	<td><input type="text" name="age" id="age" size="3" maxlength="3"value="30"/></td>
+</tr>
+<tr>
+	<td colspan="2" align="center"><input type="button" value="회원가입" onclick="doSignin()"/></td>
+</tr> 
+</table>
+</div>
+<input type="hidden" name="command" id="command" value="SIGNIN"/><br/>
+
+</body>
+</html>

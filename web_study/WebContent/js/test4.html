@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script>
+function makeThing(btnObj){
+	var fObj = btnObj.form;
+	var mkObj = fObj.elements[0];
+	
+	var checkNum = new Number(mkObj.value);
+	if(isNaN(checkNum)){
+		alert("제발 숫자좀 이력해주세요!!! 이새...");
+		mkObj.value = "";
+		mkObj.focus();
+	}
+	 var divObj = document.getElementById("r_div");
+	 var inputStr = "";
+	for(var i=0;i<checkNum;i++){
+		inputStr += "<input type='text' id='mk" + (i+1) + "'/>";
+	}
+	inputStr += "<br/>찾을 값 : <input type='text' id='searchValue'/>";
+	inputStr += "<input type='button' value='값찾기' onclick='search()'/>";
+	divObj.innerHTML = inputStr; 
+}
+
+
+
+</script>
+<body>
+<form>
+<!-- 생성갯수 text에는 숫자만 들어갈 수 있어요~ -->
+<!-- 생성버튼을 클릭하면 생성갯수만큼 r_div에 input tag가 들어가면 되요~ -->
+<!-- 생성된 input tag의 id는 mk1부터 생성된 갯수만큼 1씩 늘어나요! -->
+생성갯수 : <input type="text" name="makeNum"/>
+<input type="button" value="생성!!!" onclick="makeThing(this)"/>
+<div id="r_div"></div>
+</form>
+</body>
+</html>

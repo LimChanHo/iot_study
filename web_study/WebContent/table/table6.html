@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script>
+function drawMatrix(){
+	var obj = document.getElementById("num1");
+	var num1 = parseInt(document.getElementById("num1").value);
+	var num2 = parseInt(document.getElementById("num2").value);
+	var tableStr = "<table border='1'>";
+	for(var i=0;i<num1;i++){
+		tableStr += "<tr>";
+		for(var j=0;j<num2;j++){
+			tableStr +="<td>[" + i + "," + j +"]</td>"; 
+		}			
+		tableStr += "</tr>";
+	}
+	tableStr += "</table>";
+	document.getElementById("result_div").innerHTML = tableStr;
+}
+</script>
+<body>
+	<table border="1">
+		<tr> 
+			<td>로우수 : <input type="text" name="num1" id="num1"/></td>
+			<td>컬럼수 : <input type="text" name="num2" id="num2"/></td>
+		</tr>
+		<tr> 
+			<td colspan="2" align="center"><input type="button" value="그리기" onclick="drawMatrix()"/></td>
+		</tr>
+	</table>
+	<div id="result_div"><font color='blue'>파랑글씨</font></div>
+</body>
+<script>
+document.getElementById("result_div").innerHTML+="<font color='red'>빨강글씨</font>";
+</script>
+</html>

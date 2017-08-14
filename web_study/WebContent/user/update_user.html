@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="/test_web/sign.user">
+수정할 유저 번호 : <input type="text" name="user_num" id="user_num"/></br>
+<table>
+
+<tr>
+	<td>name</td>
+	<td><input type="text" name="name" id="name"/></td>
+</tr>
+<tr>
+	<td>class num</td>
+	<td><input type="text" name="class_num" id="class_num"/></td>
+</tr>
+<tr>
+	<td>age</td>
+	<td><input type="text" name="age" id="age"/></td>
+</tr>
+</table>
+<input type="submit" value="수정"/>
+<input type="hidden" name="command" id="command" value="UPDATE"/>
+</form>
+</body>
+</html>
