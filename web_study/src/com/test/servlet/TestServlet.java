@@ -30,13 +30,13 @@ public class TestServlet extends HttpServlet{
 		request.setCharacterEncoding("UTF-8");
 	    Gson g = new Gson();
 	    Test hm = g.fromJson(request.getReader(), Test.class);
+	    System.out.println(hm);
 	    List<Test> list = new ArrayList<Test>();
 	    list.add(hm);
 	    System.out.println(list);
 	    System.out.println(hm);
 	    System.out.println(list);
 	    String resultStr = g.toJson(hm);
-	    System.out.println(resultStr);
 	    System.out.println(resultStr);
 	    doProcess(response, resultStr);
 //	    Goods goods = g.fromJson(request.getReader(), Goods.class);
