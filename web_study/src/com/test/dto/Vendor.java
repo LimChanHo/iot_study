@@ -9,6 +9,17 @@ public class Vendor {
 	private String viPhone;
 	private String viCredat;
 	private String viCretim;
+	private String command;
+	private Page page;
+	
+	
+	@Override
+	public String toString() {
+		return "Vendor [viNum=" + viNum + ", viName=" + viName + ", viDesc=" + viDesc + ", viAddress=" + viAddress
+				+ ", viPhone=" + viPhone + ", viCredat=" + viCredat + ", viCretim=" + viCretim + ", command=" + command
+				+ ", page=" + page + "]";
+	}
+	
 	public int getViNum() {
 		return viNum;
 	}
@@ -50,6 +61,18 @@ public class Vendor {
 	}
 	public void setViCretim(String viCretim) {
 		this.viCretim = viCretim;
+	}
+	public String getCommand() {
+		return command;
+	}
+	public void setCommand(String command) {
+		this.command = command;
+	}
+	public Page getPage() {
+		return page;
+	}
+	public void setPage(Page page) {
+		this.page = page;
 	}
 	
 }

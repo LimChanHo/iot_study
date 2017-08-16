@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/header.jsp"%>
-
-
 <div class="container">
 	<div class="container" style="text-align: center; padding-top: 20px;padding-bottom: 20px;">
 		<select id="s_vendor" class="selectpicker">
@@ -24,15 +22,22 @@
 		<tbody id="result_tbody">
 		</tbody>
 	</table>
+	<button id="btnInsert" class="btn btn-primary"  type="button">상품등록</button>
 </div>
 <div class="jb-center" style="text-align: center">
 	<ul class="pagination" id="page">
 	</ul>
 </div>
-<textarea  id="div_result">
-</textarea >
 <script>
 	var pageInfo = {};
+	var nowPage = "<%=request.getParameter("nowPage")%>";
+	
+	if(nowPage=="null"){
+		nowPage = "1";
+	}
+	$("#btnInsert").click(function(){
+		location.href="/goods/goods_insert.jsp";
+	})
 	$("#searchGoods").click(function() {
 		var giName = $("#giName").val().trim();
 		var viNum = $("#s_vendor").val().trim();
@@ -49,7 +54,7 @@
 		}
 		params["command"] = "list";
 		var page = {};
-		page["nowPage"] = "1";
+		page["nowPage"] = nowPage;
 		params["page"] = page;
 		movePageWithAjax(params, "/list.goods", callback);
 	});
@@ -100,16 +105,21 @@
 			page["nowPage"] = pageInfo.nowPage;
 			params["page"] = page;
 			movePageWithAjax(params, "/list.goods", callBackView);
-		})
+		});
 	}
 	function callBackView(result){
-		var url = result.url + "?nowPage=" + result.page.nowPage + "&giNum=" + result.goods.giNum;
+		var url = result.url + "?nowPage=" + result.page.nowPage;
+		url += "&giNum=" + result.goods.giNum;
+		url += "&giName=" + result.goods.giName;
+		url += "&giDesc=" + result.goods.giDesc;
+		url += "&viNum=" + result.goods.viNum;
+		url += "&viName=" + result.goods.viName;
 		location.href=url;
 	}
 	
 	$(document).ready(function() {
 		var page = {};
-		page["nowPage"] = "1";
+		page["nowPage"] = nowPage;
 		var params = {};
 		params["page"] = page;
 		params["command"] = "list";

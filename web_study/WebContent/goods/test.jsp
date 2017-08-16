@@ -24,7 +24,7 @@ $("#btn").click(function(){
 	alert(params.struct.a);
 	$.ajax({ 
 			type     : "POST"
-	    ,   url      : "/list.test"
+	    ,   url      : "/list.goods"
 	    ,   dataType : "json" 
 	    ,   beforeSend: function(xhr) {
 	        xhr.setRequestHeader("Accept", "application/json");

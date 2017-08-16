@@ -1,7 +1,8 @@
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -99,10 +100,8 @@ function alertOp(){
             <li><a href="/board/board_select.jsp">게시판가기</a></li>
             <li><a href="/user/user_info.jsp">유저정보가기</a></li>
             <li><a href="/role/role_select.jsp">권한정보가기</a></li>
-            <li><a href="/goods/goods_list.jsp">제품리스트</a></li>
-            <li><a href="/goods/goods_view.jsp">제품뷰</a></li>
-            <li><a href="/goods/test.jsp">테스트</a></li>
-            
+            <li><a href="/goods/goods_list.jsp">제품정보가기</a></li>
+            <li><a href="/vendor/vendor_list.jsp">회사정보가기</a></li>
             <li><a href="/user/logout_ok.jsp"><%=loginStr %></a></li>
           </ul>
           
