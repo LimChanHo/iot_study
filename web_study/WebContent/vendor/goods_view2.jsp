@@ -1,9 +1,6 @@
 <%@ include file="/common/header.jsp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.sql.*"%>
-<%@ page import="com.test.common.DBConn"%>
-<%@ page import="com.test.dto.UserInfo"%>
 	<div class="container-view"> 
 		<table id="table"  data-height="460"	class="table table-bordered table-hover">
 		<thead>
@@ -12,22 +9,22 @@
 			</tr>
 			<tr>
 				<td class="col-md-2">상품번호</td>
-				<td class="col-md-4" colspan="2"><%=request.getParameter("giNum") %></td>
+				<td class="col-md-4" colspan="2">${goods.giNum}</td>
 			<tr>
 				<td>상품이름</td>
-				<td colspan="2"><%=request.getParameter("giName") %></td>
+				<td colspan="2">${goods.giName}</td>
 			</tr>
 			<tr>
 				<td>상품설명</td>
-				<td colspan="2"><%=request.getParameter("giDesc") %></td>
+				<td colspan="2">${goods.giDesc}</td>
 			</tr>
 			<tr>
 				<td>생산자번호</td>
-				<td colspan="2"><%=request.getParameter("viNum") %></td>
+				<td colspan="2">${goods.viNum}</td>
 			</tr>
 			<tr>
 				<td>생산자이름</td>
-				<td colspan="2"><%=request.getParameter("viName") %></td>
+				<td colspan="2">${goods.viName}</td>
 			</tr>
 			<tr>
 				<td>
@@ -45,13 +42,13 @@
 	<!-- /container -->
 <script>
 $("#btnDelete").click(function(){
-	var isDelete = confirm("해당 회사 정보를 삭제 하시겠습니까?");
+	var isDelete = confirm("해당 상품을 삭제 하시겠습니까?");
 	if(isDelete){
 		var params = {};
-		params["giNum"] = "<%=request.getParameter("giNum")%>";
+		params["giNum"] = "${goods.giNum}";
 		params["command"] = "delete";
 		var page = {};
-		page["nowPage"] = "<%=request.getParameter("nowPage")%>";
+		page["nowPage"] = "${page.nowPage}";
 		params["page"] = page;
 		movePageWithAjax(params, "/list.goods", callBackView);
 	}
@@ -60,8 +57,6 @@ $("#btnDelete").click(function(){
 function callBackView(result){
 	alert(result.msg);
 	if(result.url!=""){	
-		alert(result.url);
-		alert(result.page.nowPage);
 		location.href = result.url + "?nowPage=" + result.page.nowPage;
 	}
 }
