@@ -15,19 +15,25 @@ import com.test.dto.Vendor;
 public class VendorService {
 
 
-	public List<Vendor> selectVendorsList(String viName){
+	public List<Vendor> selectVendorsList(String viName, Page page){
 		Connection con = null;
 		PreparedStatement ps = null;
 		try {
 			String sql = "select vinum, viname, videsc, viaddress, viphone from vendor_info where 1=1";
+			int idx=0;
 			if(viName!=null){
 				sql += " and viname like ?";
 			}
+			;
+			sql += " order by vinum desc";
+			sql += " limit ?,?";
 			con = DBConn.getCon();
 			ps = con.prepareStatement(sql);
 			if(viName!=null){
-				ps.setString(1, "%" + viName + "%");
+				ps.setString(++idx, "%" + viName + "%");
 			}
+			ps.setInt(++idx, page.getStartRow()); 
+			ps.setInt(++idx, page.getRowCnt());
 			ResultSet rs = ps.executeQuery();
 			List<Vendor> vendorList = new ArrayList<Vendor>();
 			while(rs.next()){
@@ -179,5 +185,48 @@ public class VendorService {
 			}
 		}
 		return null;
+	}
+	
+	public int getTotalCount(){
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			String sql = "select count(1) "
+					+ " from vendor_info "
+					+ " where 1=1";
+//			if(pGoods.getViNum()!=0){
+//				sql += " and gi.vinum=?";
+//			}
+//			if(pGoods.getGiName()!=null){
+//				sql += " and gi.giname like ?";
+//			}
+			con = DBConn.getCon();
+			ps = con.prepareStatement(sql);
+//			if(pGoods.getViNum()!=0 && pGoods.getGiName()==null){
+//				ps.setInt(1, pGoods.getViNum());
+//			}else if(pGoods.getGiName()!=null && pGoods.getViNum()==0){
+//				ps.setString(1, "%" + pGoods.getGiName() + "%");
+//			}else if(pGoods.getGiName()!=null && pGoods.getViNum()!=0 ){
+//				ps.setInt(1, pGoods.getViNum());
+//				ps.setString(2, "%" + pGoods.getGiName() + "%");
+//			}
+			
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				return rs.getInt(1);
+			}
+		}catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			try {
+				ps.close();
+				DBConn.closeCon();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return 0;
 	}
 }

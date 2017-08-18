@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.test.dto.Page;
 import com.test.dto.Vendor;
 import com.test.service.VendorService;
 
@@ -28,12 +29,22 @@ public class VendorServlet extends HttpServlet{
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		request.setCharacterEncoding("UTF-8");
 
+		
 	    String command = request.getParameter("command");
 	    String result = "";
 	    if(command.equals("list")){
+	    	Page page = new Page();
 	    	String viName = request.getParameter("viName");
-	    	List<Vendor> vendorList = vs.selectVendorsList(viName);
-	    	result = g.toJson(vendorList);
+	    	String nowPage1 = request.getParameter("nowPage");
+	    	int nowPage = Integer.parseInt(nowPage1);
+	    	page.setNowPage(nowPage);
+	    	int totalCnt = vs.getTotalCount();
+	    	page.setTotalCnt(totalCnt);
+	    	HashMap hm = new HashMap();
+	    	List<Vendor> vendorList = vs.selectVendorsList(viName,page);
+	    	hm.put("page", page);
+	    	hm.put("vendorList", vendorList);
+	    	result = g.toJson(hm);
 //	    	for(Vendor v : vendorList){
 //	    		result += "<tr>";
 //	    		result += "<td>" + v.getViNum() + "</td>";

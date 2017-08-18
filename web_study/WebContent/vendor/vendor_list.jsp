@@ -27,6 +27,11 @@
 	</ul>
 </div>
 <script>
+var nowPage = "<%=request.getParameter("nowPage")%>";
+
+if(nowPage=="null"){
+	nowPage = "1";
+}
 
 	$("#btnInsert").click(function(){
 		location.href="/vendor/vendor_insert.jsp";
@@ -70,17 +75,20 @@
 	}
 	
 	$(document).ready(function() {
-		var params = "command=list";
+		var params = "command=list&nowPage=" + nowPage;
 		$.ajax({ 
 	    		type     : "POST"
 		    ,   url      : "/list.vendor"
 		    ,   dataType : "json" 
 		    ,   data     : params
 		    ,   success : function(result){
+		    	var pageInfo = result.page;
+		    	makePagination(pageInfo,"page");
+		    	setEvent(pageInfo,params , "/list.vendor");
 				$('#table').bootstrapTable('destroy');
 				var resultStr = "";
-				for(var i=0, max=result.length;i<max;i++){
-					var vendor = result[i];
+				for(var i=0, max=result.vendorList.length;i<max;i++){
+					var vendor = result.vendorList[i];
 					resultStr += "<tr data-view='" + vendor.viNum + "'>";
 					resultStr +="<td class='text-center'>" + vendor.viNum + "</td>";
 					resultStr +="<td class='text-center'>" + vendor.viName + "</td>";
