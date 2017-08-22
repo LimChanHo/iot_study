@@ -13,13 +13,15 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.test.dto.Page;
 import com.test.dto.Vendor;
+import com.test.service.ServiceFactory;
 import com.test.service.VendorService;
 
 public class VendorServlet extends HttpServlet{
 	
 	
 	private static final long serialVersionUID = 1L;
-	private VendorService vs = new VendorService();
+	private VendorService vs;
+	
 	private Gson g = new Gson();	
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{	
@@ -32,6 +34,7 @@ public class VendorServlet extends HttpServlet{
 		
 	    String command = request.getParameter("command");
 	    String result = "";
+	    vs = ServiceFactory.getVendorService();
 	    if(command.equals("list")){
 	    	Page page = new Page();
 	    	String viName = request.getParameter("viName");

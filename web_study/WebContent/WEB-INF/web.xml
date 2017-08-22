@@ -48,16 +48,49 @@
     <servlet-name>VendorServlet</servlet-name>
     <url-pattern>*.vendor</url-pattern>
   </servlet-mapping>
-  <filter>
-    <filter-name>Set Character Encoding</filter-name>
-    <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
-    <init-param>
-      <param-name>encoding</param-name>
-      <param-value>utf-8</param-value>
-    </init-param>
-  </filter>
-  <filter-mapping>
-    <filter-name>Set Character Encoding</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
+    <servlet>
+    <servlet-name>TestServlet</servlet-name>
+    <servlet-class>com.test.servlet.TestServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TestServlet</servlet-name>
+    <url-pattern>*.test</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>FormTest</servlet-name>
+    <servlet-class>com.test.servlet.test.FormServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FormTest</servlet-name>
+    <url-pattern>*.formtest</url-pattern>
+  </servlet-mapping>
+  <servlet>
+		<servlet-name>upload</servlet-name>
+		<servlet-class>com.test.servlet.FileUploadServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>upload</servlet-name>
+		<url-pattern>/upload</url-pattern>
+	</servlet-mapping>
+	<filter>
+		<filter-name>FilterTest</filter-name>
+		<filter-class>com.test.filter.CustomFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>FilterTest</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 </web-app>
+<!--   <filter> -->
+<!--     <filter-name>Set Character Encoding</filter-name> -->
+<!--     <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class> -->
+<!--     <init-param> -->
+<!--       <param-name>encoding</param-name> -->
+<!--       <param-value>utf-8</param-value> -->
+<!--     </init-param> -->
+<!--   </filter> -->
+<!--   <filter-mapping> -->
+<!--     <filter-name>Set Character Encoding</filter-name> -->
+<!--     <url-pattern>/*</url-pattern> -->
+<!--   </filter-mapping> -->
+<!-- </web-app> -->

@@ -21,7 +21,7 @@ $("input[type='button']").click(function(){
 	    }
 	    ,   data     : params
 	    ,   success : function(result){
-	    	alert(result);
+	    	alert(result.msg1 + ":" + result.value1);
 	    }
 	    ,   error : function(xhr, status, e) {
 		    	alert("에러 : "+e);
