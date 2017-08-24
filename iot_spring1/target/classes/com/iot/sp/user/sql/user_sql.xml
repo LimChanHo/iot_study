@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd"> 
+
+<mapper namespace="userinfo">
+
+	<select id="SELECT_USER" parameterType="Map" resultType="user">
+	  select 
+	    userid,
+	  	userpwd 
+	  from user_info
+	  where userid = #{userId}
+	  and userpwd = #{userPwd}
+	</select>	
+
+	<select id="SELECT_USER2" parameterType="user" resultType="user">
+	  select 
+	    userid,
+	  	userpwd 
+	  from user_info
+	  where userid = #{userId}
+	</select>
+</mapper>
+
+
+
+
+
+
